@@ -1,8 +1,2 @@
 ---
 # vars file for ansible-role-user
-users:
-    - username: alex
-      use_sudo: yes
-
-    - username: joy
-      use_sudo: no

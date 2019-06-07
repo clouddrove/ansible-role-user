@@ -1,0 +1,15 @@
+---
+- name: create sudoers file backup
+  copy:
+    src: /etc/sudoers
+    dest: /tmp/sudoers.tmp
+    remote_src: yes
+    validate: /usr/sbin/visudo -cf %s
+
+- name: create sudoers file backup
+  copy:
+    src: /etc/sudoers
+    dest: /etc/sudoers.bkp
+    remote_src: yes
+    validate: /usr/sbin/visudo -cf %s
+
