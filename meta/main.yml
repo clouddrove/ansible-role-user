@@ -3,6 +3,7 @@
 dependencies: []
 
 galaxy_info:
+  role_name: user-mgt
   author: anmolnagpal
   description: create users
   company: "CloudDrove, LLC"
