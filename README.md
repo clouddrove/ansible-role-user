@@ -28,7 +28,7 @@ passed in as parameters) is always nice for users too:
     - hosts: servers
       roles:
          - { role: ansible-role-user,                      tags: [ 'user' ] }
-tested
+Tested
 --------------
 Currently, this is only tested on Ubuntu 18.02 as a client and server machine. It should theoretically work on older versions of Ubuntu or Debian based systems.
 
