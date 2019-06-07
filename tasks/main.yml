@@ -1,4 +1,3 @@
 ---
 
-- import_tasks: backup-sudoers.yml
-- import_tasks: create-users.yml
+- import_tasks: users.yml
