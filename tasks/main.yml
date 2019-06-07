@@ -1,4 +1,9 @@
 ---
+- name: Copy sudoers file for safety
+  command: cp -f /etc/sudoers /etc/sudoers.tmp
+
+- name: Create sudoers file backup
+  command: cp -f /etc/sudoers /etc/sudoers.bak
 
 - name: Add users | create users, shell, home dirs
   user:
