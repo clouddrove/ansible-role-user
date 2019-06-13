@@ -5,3 +5,6 @@ users:
 
     - username: anmol
       use_sudo: no
+
+rm_users:
+    - username: kamlesh
