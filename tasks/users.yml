@@ -28,9 +28,10 @@
   backup: yes
 
 
-- name: delete user
+- name: delete user | remove user
   user:
     name: "{{ item.username }}"
     state: absent
     remove: yes
+  ignore_errors: yes
   with_items: '{{ rm_users }}'
