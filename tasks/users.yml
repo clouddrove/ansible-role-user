@@ -8,25 +8,15 @@
     comment: 'created with ansible'
   with_items: '{{ users }}'
 
-- name: setup | authorized key upload
-  authorized_key:
-    user: "{{ item.username }}"
-    key: "{{ lookup('file', 'pub_keys/{{ item.username }}.pub') }}"
-    path: '/home/{{ item.username }}/.ssh/authorized_keys'
-    manage_dir: no
-  with_items: '{{ users }}'
-
 - name: sudoers | update sudoers file and validate
   lineinfile:
-       dest: "/etc/sudoers"
-       insertafter: EOF
-       line: '{{ item.username }} ALL=(ALL) NOPASSWD: ALL'
-       regexp: '^{{ item.username }} .*'
-       state: present
-  when: '{{ item.use_sudo }} == True'
+    dest: "/etc/sudoers"
+    insertafter: EOF
+    line: '{{ item.username }} ALL=(ALL) NOPASSWD: ALL'
+    regexp: '^{{ item.username }} .*'
+    state: present
+  when: item.use_sudo  == 1
   with_items: '{{ users }}'
-  backup: yes
-
 
 - name: delete user | remove user
   user:

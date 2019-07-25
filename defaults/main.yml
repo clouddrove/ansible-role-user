@@ -1,4 +1,5 @@
 ---
+
 users:
     - username: sohan
       use_sudo: yes
