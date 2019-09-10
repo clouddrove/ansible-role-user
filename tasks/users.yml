@@ -1,0 +1,27 @@
+---
+
+- name: add users | create users, shell, home dirs
+  user:
+    name: "{{ item.username }}"
+    shell: "/bin/bash"
+    createhome: true
+    comment: 'created with ansible'
+  with_items: '{{ users }}'
+
+- name: sudoers | update sudoers file and validate
+  lineinfile:
+    dest: "/etc/sudoers"
+    insertafter: EOF
+    line: '{{ item.username }} ALL=(ALL) NOPASSWD: ALL'
+    regexp: '^{{ item.username }} .*'
+    state: present
+  when: item.use_sudo
+  with_items: '{{ users }}'
+
+- name: delete user | remove user
+  user:
+    name: "{{ item.username }}"
+    state: absent
+    remove: true
+  ignore_errors: true
+  with_items: '{{ rm_users }}'

@@ -1,0 +1,13 @@
+---
+
+# users list to create
+users:
+    - username: nikita
+      use_sudo: true
+
+    - username: anmol
+      use_sudo: false
+
+# users list to remove
+rm_users:
+    - username: sohan

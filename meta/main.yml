@@ -1,0 +1,25 @@
+---
+dependencies: []
+
+galaxy_info:
+  author: clouddrove
+  description: This ansible role is used to create users on server.
+  company: "CloudDrove, LLC"
+  license: "license (BSD, MIT)"
+  min_ansible_version: 2.4
+  platforms:
+    - name: Debian
+      versions:
+        - jessie
+        - stretch
+    - name: Ubuntu
+      versions:
+        - trusty
+        - xenial
+        - bionic
+  galaxy_tags:
+    - server
+    - ubuntu
+    - linux
+    - user
+    - users
