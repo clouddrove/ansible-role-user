@@ -11,7 +11,7 @@
 - name: setup | authorized key upload
   authorized_key:
     user: "{{ item.username }}"
-    key: "{{ lookup('file', './../../ssh/users/{{ item.username }}.pub') }}"
+    key: "{{ lookup('file', './../../_ssh/{{ ENV }}/{{ item.username }}.pub') }}"
     path: '/home/{{ item.username }}/.ssh/authorized_keys'
     manage_dir: false
   with_items: '{{ users }}'
