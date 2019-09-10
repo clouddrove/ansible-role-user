@@ -8,6 +8,14 @@
     comment: 'created with ansible'
   with_items: '{{ users }}'
 
+- name: setup | authorized key upload
+  authorized_key:
+    user: "{{ item.username }}"
+    key: "{{ lookup('file', './../../ssh/users/{{ item.username }}.pub') }}"
+    path: '/home/{{ item.username }}/.ssh/authorized_keys'
+    manage_dir: false
+  with_items: '{{ users }}'
+
 - name: sudoers | update sudoers file and validate
   lineinfile:
     dest: "/etc/sudoers"
