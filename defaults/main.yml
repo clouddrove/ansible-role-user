@@ -2,12 +2,9 @@
 
 # users list to create
 users:
-    - username: nikita
-      use_sudo: true
-
-    - username: anmol
-      use_sudo: false
+    - username: anmol  # username
+      use_sudo: true   # flag to give user sudo access 
 
 # users list to remove
-rm_users:
-    - username: sohan
+# rm_users:
+#     - username: user # username
