@@ -32,4 +32,5 @@
     state: absent
     remove: true
   ignore_errors: true
+  when: rm_user_flag
   with_items: '{{ rm_users }}'
