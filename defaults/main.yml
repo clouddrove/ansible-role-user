@@ -6,5 +6,6 @@ users:
       use_sudo: true   # flag to give user sudo access 
 
 # users list to remove
+rm_user_flag: false    # flag to run remove user or not
 # rm_users:
 #     - username: user # username
