@@ -8,6 +8,15 @@
     comment: 'created with ansible'
   with_items: '{{ users }}'
 
+
+- name: setup | base authorized key upload
+  authorized_key:
+    user: "{{ item.username }}"
+    key: "{{ lookup('file', './../../_ssh/{{ Env }}/authorized_keys.pub') }}"
+    path: '/home/{{ item.username }}/.ssh/authorized_keys'
+    manage_dir: false
+  with_items: '{{ users }}'
+
 - name: setup | authorized key upload
   authorized_key:
     user: "{{ item.username }}"
