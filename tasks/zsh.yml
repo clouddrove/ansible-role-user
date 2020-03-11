@@ -1,0 +1,73 @@
+---
+## Install Oh-my-zsh
+
+- name: install git and zsh debian
+  apt:
+    name: ['git', 'zsh']
+    state: present
+    update_cache: true
+    cache_valid_time: 5400
+
+- name: clone oh-my-zsh repo
+  git:
+    depth: 1
+    repo: "{{ item.name }}"
+    version: master
+    dest: /usr/local/share/{{ item.dir }}
+  with_items:
+    - name: https://github.com/robbyrussell/oh-my-zsh
+      dir: oh-my-zsh
+    - name: https://github.com/zsh-users/zsh-syntax-highlighting
+      dir: zsh-syntax-highlighting
+    - name: git://github.com/zsh-users/zsh-autosuggestions
+      dir: zsh-autosuggestions
+
+- name: create conf folder in home directory
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0777
+  with_items:
+    - "/usr/local/share/oh-my-zsh/conf/"
+    - "/usr/local/share/oh-my-zsh/cache/"
+
+- name: deploy .zshrc
+  template:
+    src: config/zshrc.in
+    dest: /usr/local/share/oh-my-zsh/conf/zshrc
+    mode: 0777
+
+- name: deploy .extra
+  template:
+    src: config/extra.in
+    dest: "{{ home_dir | default('/home/') }}{{ item.username }}/.extra"
+    mode: 0777
+  with_items: '{{ users }}'
+
+- name: deploy .bash_profile
+  template:
+    src: config/bash_profile.in
+    dest: "{{ home_dir | default('/home/') }}{{ item.username }}/.bash_profile"
+    mode: 0777
+  with_items: '{{ users }}'
+
+- name: remove standard zshrc
+  file:
+    path: "{{ home_dir | default('/home/') }}{{ item.username }}/.zshrc"
+    state: absent
+  changed_when: false
+  with_items: '{{ users }}'
+
+- name: symlink zshrc
+  file:
+    path: "{{ home_dir | default('/home/') }}{{ item.username }}/.zshrc"
+    src: /usr/local/share/oh-my-zsh/conf/zshrc
+    state: link
+    mode: 0777
+  changed_when: false
+  with_items: '{{ users }}'
+
+- name: set zsh as default shell
+  shell: "chsh -s $(which zsh) {{ item.username }}"
+  changed_when: false
+  with_items: '{{ users }}'
