@@ -5,5 +5,5 @@ StrictHostKeyChecking no
 UserKnownHostsFile /dev/null
 ControlMaster auto
 ControlPersist 10m
-ControlPath ~/.ssh/instance_socket-%r@%h:%p
+ControlPath /tmp/instance_socket-%r@%h:%p
 ForwardAgent yes
