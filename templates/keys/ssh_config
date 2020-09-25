@@ -1,0 +1,9 @@
+#{{ ansible_managed }}
+Host *
+LogLevel QUIET
+StrictHostKeyChecking no
+UserKnownHostsFile /dev/null
+ControlMaster auto
+ControlPersist 10m
+ControlPath /tmp/instance_socket-%r@%h:%p
+ForwardAgent yes
