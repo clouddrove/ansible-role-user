@@ -9,3 +9,4 @@ users:
 rm_user_flag: false #flag to run remove user or not
 # rm_users:
 #     - username: user #username
+zsh_theme: steeef
