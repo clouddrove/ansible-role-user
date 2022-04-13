@@ -68,6 +68,6 @@
   with_items: '{{ users }}'
 
 - name: set zsh as default shell
-  shell: "chsh -s $(which zsh) {{ item.username }}"
+  ansible.builtin.shell: "chsh -s $(which zsh) {{ item.username }}"
   changed_when: false
   with_items: '{{ users }}'
