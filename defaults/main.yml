@@ -2,7 +2,7 @@
 
 # users list to create
 users:
-    - username: ubuntu #username
+    - username: anmol #username
       use_sudo: true  #flag to give user sudo access
 zsh_theme: steeef
 
