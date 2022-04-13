@@ -1,2 +1,5 @@
+---
+## skip errors
 skip_list:
   - 'fqcn-builtins'
+  - 'ignore_errors'
