@@ -2,8 +2,9 @@
 
 # users list to create
 users:
-    - username: anmol #username
+    - username: ubuntu #username
       use_sudo: true  #flag to give user sudo access
+zsh_theme: steeef
 
 # users list to remove
 rm_user_flag: false #flag to run remove user or not
