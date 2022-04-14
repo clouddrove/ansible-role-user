@@ -3,5 +3,5 @@
 *.iml
 *.zip
 *.cache
+*_ssh
 molecule
-

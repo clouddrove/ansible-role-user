@@ -49,6 +49,6 @@
     name: "{{ item.username }}"
     state: absent
     remove: true
-  failed_when: "'NOTHING' in command_result.stderr"
+  ignore_errors: true
   when: rm_user_flag
   with_items: '{{ rm_users }}'
