@@ -6,7 +6,7 @@ galaxy_info:
   description: This ansible role is used to create users on server.
   company: "CloudDrove Inc."
   license: "license (BSD, MIT)"
-  role_name: user
+  role_name: ansible_role_user
   namespace: "clouddrove"
   min_ansible_version: 2.4
   platforms:
