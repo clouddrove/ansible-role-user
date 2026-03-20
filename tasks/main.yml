@@ -1,4 +1,7 @@
 ---
 
-- import_tasks: users.yml
-- import_tasks: zsh.yml
+- name: Users
+
+  ansible.builtin.import_tasks: users.yml
+- name: Zsh
+  ansible.builtin.import_tasks: zsh.yml

@@ -1,15 +1,15 @@
 ---
 
-- name: add users | create users, shell, home dirs
-  user:
+- name: Add users | create users, shell, home dirs
+  ansible.builtin.user:
     name: "{{ item.username }}"
     shell: "/bin/bash"
     createhome: true
     comment: 'created with ansible'
   with_items: '{{ users }}'
 
-- name: modify .ssh permissions
-  file:
+- name: Modify .ssh permissions
+  ansible.builtin.file:
     path: '/home/{{ item.username }}/.ssh'
     state: directory
     owner: "{{ item.username }}"
@@ -17,16 +17,16 @@
     mode: 0700
   with_items: '{{ users }}'
 
-- name: setup | authorized key upload
-  authorized_key:
+- name: Setup | authorized key upload
+  ansible.posix.authorized_key:
     user: "{{ item.username }}"
     key: "{{ lookup('file', './../../_ssh/'+Env+'/'+item.username+'.pub') }}"
     path: '/home/{{ item.username }}/.ssh/authorized_keys'
     manage_dir: false
   with_items: '{{ users }}'
 
-- name: transfer ssh config /etc/ssh/ssh_config
-  copy:
+- name: Transfer ssh config /etc/ssh/ssh_config
+  ansible.builtin.copy:
     src: templates/keys/ssh_config
     dest: /home/{{ item.username }}/.ssh/config
     owner: "{{ item.username }}"
@@ -34,8 +34,8 @@
     mode: 0600
   with_items: '{{ users }}'
 
-- name: sudoers | update sudoers file and validate
-  lineinfile:
+- name: Sudoers | update sudoers file and validate
+  ansible.builtin.lineinfile:
     dest: "/etc/sudoers"
     insertafter: EOF
     line: '{{ item.username }} ALL=(ALL) NOPASSWD: ALL'
@@ -44,8 +44,8 @@
   when: item.use_sudo
   with_items: '{{ users }}'
 
-- name: delete user | remove user
-  user:
+- name: Delete user | remove user
+  ansible.builtin.user:
     name: "{{ item.username }}"
     state: absent
     remove: true
