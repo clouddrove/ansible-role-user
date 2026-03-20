@@ -3,8 +3,7 @@
 - name: Add users | create users, shell, home dirs
   ansible.builtin.user:
     name: "{{ item.username }}"
-    ansible.builtin.shell:
-      cmd: "/bin/bash"
+    shell: "/bin/bash"
     createhome: true
     comment: 'created with ansible'
   with_items: '{{ users }}'
@@ -19,7 +18,7 @@
   with_items: '{{ users }}'
 
 - name: Setup | authorized key upload
-  authorized_key:
+  ansible.posix.authorized_key:
     user: "{{ item.username }}"
     key: "{{ lookup('file', './../../_ssh/'+Env+'/'+item.username+'.pub') }}"
     path: '/home/{{ item.username }}/.ssh/authorized_keys'
